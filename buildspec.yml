@@ -4,7 +4,7 @@ phases:
   install:
     commands:
       - docker info || exit 0
-      - docker compose version || exit 0
+      - docker compose version
       #- apt update
       #- yarn install
       #- playwright install chromium
