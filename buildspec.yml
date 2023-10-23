@@ -7,6 +7,7 @@ phases:
       - docker compose version || exit 0
       - apt update
       - yarn install
+      - playwright install chromium
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase...
