@@ -5,6 +5,7 @@ phases:
     commands:
       - docker info || exit 0
       - docker compose version || exit 0
+      - apt update
       - yarn install
   pre_build:
     commands:
@@ -12,7 +13,6 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - mvn install
   post_build:
     commands:
       - echo Build completed on `date`
