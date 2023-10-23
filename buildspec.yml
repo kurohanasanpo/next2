@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - docker info || exit 0
+      - docker compose version || exit 0
+      #- apt update
+      #- yarn install
+      #- playwright install chromium
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre_build phase...
+  build:
+    commands:
+      - echo Build started on `date`
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      #- npx playwright test
+artifacts:
+  files:
+    - ./test-results
