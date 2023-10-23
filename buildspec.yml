@@ -2,8 +2,10 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      java: corretto11
+    commands:
+      - docker info || exit 0
+      - docker compose version || exit 0
+      - yarn install
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase...
@@ -14,6 +16,7 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - npx playwright test
 artifacts:
   files:
     - ./test-results
