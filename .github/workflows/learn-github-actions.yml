@@ -1,16 +1,37 @@
 name: learn-github-actions
 run-name: ${{ github.actor }} is learning GitHub Actions
-on: [pull_request]
+on: [push]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: cd __tests__/playwright/; docker compose up
-      - run: ls -l __tests__/playwright
-      - uses: actions/upload-artifact@v2
-        if: always()
+      - uses: aws-actions/configure-aws-credentials@v1
         with:
-          name: playwright-report
-          path: __tests__/playwright/playwright-report
-          retention-days: 1
+          aws-access-key-id:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
+      - name: aws-ssm-to-env
+        uses: eliasjcjunior/aws-ssm-parameters-action@main
+        with:
+          recursive: true
+          split-env: true
+          upper-case: true
+          paths: |
+            /rsi-caas-userdata/api/dev/db/
+          
+      - name: log envs
+        env:
+          USER: ${{ env.DB_USER }}
+          PASSWORD: ${{ env.DB_PASSWORD }}
+        run: |
+          echo $DB_USER
+          echo $DB_PASSWORD
+      #- uses: actions/checkout@v4
+      #- run: cd __tests__/playwright/; docker compose up
+      #- run: ls -l __tests__/playwright
+      #- uses: actions/upload-artifact@v2
+      #  if: always()
+      #  with:
+      #    name: playwright-report
+      #    path: __tests__/playwright/playwright-report
+      #    retention-days: 1
