@@ -10,7 +10,7 @@ phases:
       #- playwright install chromium
   pre_build:
     commands:
-      - echo Nothing to do in the pre_build phase...
+      - echo Nothing to do in the pre_build phase...a
   build:
     commands:
       - echo Build started on `date`
