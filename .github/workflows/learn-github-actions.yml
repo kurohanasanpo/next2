@@ -7,6 +7,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: cd __tests__/playwright/; docker compose up
+      - run: ls -l
+      - run: ls -l __tests__/playwright/playwright-report/
       - uses: actions/upload-artifact@v2
         if: always()
         with:
