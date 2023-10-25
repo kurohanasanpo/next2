@@ -7,5 +7,5 @@ jobs:
     steps:
       - run: pwd
       - run: ls -l
-      - run: cd ./__tests__/playwright
+      - run: cd __tests__/playwright/
       - run: docker compose up
