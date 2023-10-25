@@ -4,4 +4,5 @@ services:
   test:
     build: .
     ipc: host
-    
+    volumes:
+      - ./playwright-report:/tmp/playwright-report
